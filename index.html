@@ -78,6 +78,7 @@
         <div class="motto-box">
           <i class="fa-solid fa-quote-left motto-icon" aria-hidden="true"></i>
           <span class="motto-text">Masadan mutfağa en kısa yol</span>
+          <i class="fa-solid fa-quote-right motto-icon" aria-hidden="true"></i>
         </div>
 
         <p class="hero-subtitle">
@@ -95,7 +96,7 @@
 
         <div class="hero-stats">
           <div class="stat-item">
-            <span class="stat-number">0ms</span>
+            <span class="stat-number">0 ms</span>
             <span class="stat-label">Bulut Gecikmesi</span>
           </div>
           <div class="stat-item">
@@ -103,7 +104,7 @@
             <span class="stat-label">Offline Çalışma</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">1-Tık</span>
+            <span class="stat-number">Tek-Tık</span>
             <span class="stat-label">Kurulum (.exe)</span>
           </div>
         </div>
@@ -132,6 +133,71 @@
           <div>
             <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">Kesintisiz Yerel Ağ</div>
             <div style="font-size: 0.8rem; color: var(--text-muted);">İnternetsiz Wi-Fi Üzerinden Garson Bağlantısı</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page-Centered 3-Card Reference Showcase Grid -->
+    <div class="container">
+      <div class="reference-section-header">
+        <div class="section-tag"><i class="fa-solid fa-comments" aria-hidden="true"></i> Sahadan Geri Bildirimler</div>
+      </div>
+
+      <div class="reference-cards-grid">
+        <!-- Card 1: Placeholder CTA -->
+        <div class="hero-reference-card card-placeholder">
+          <div class="reference-badge badge-placeholder">
+            <i class="fa-solid fa-plus-circle" aria-hidden="true"></i> Sıra Sizde
+          </div>
+          <blockquote class="reference-quote">
+            "Bir sonraki referans işletmemiz siz olabilirsiniz!"
+          </blockquote>
+          <div class="reference-meta">
+            <div class="reference-placeholder-icon">
+              <i class="fa-solid fa-store" aria-hidden="true"></i>
+            </div>
+            <div class="reference-info">
+              <div class="reference-name">Sizin İşletmeniz</div>
+              <a href="#iletisim" class="reference-cta-link">Bize Ulaşın <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Featured Active Testimonial (Lura Beach) -->
+        <div class="hero-reference-card card-featured">
+          <div class="reference-badge">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Canlı Saha Kullanımı
+          </div>
+          <blockquote class="reference-quote">
+            "Plaj ve masa siparişlerimizi garsonlarımız saniyeler içinde mutfağa aktarıyor. Yoğun sezonda internet kopsa bile kesintisiz çalıştık."
+          </blockquote>
+          <div class="reference-meta">
+            <img src="assets/images/lura_beach.jpg" alt="Lura Beach Logo" class="reference-logo-img" onerror="this.style.display='none'">
+            <div class="reference-info">
+              <div class="reference-name">Mücahit Işık</div>
+              <div class="reference-company">Lura Beach</div>
+              <div class="reference-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Zeytinli, Altınkum Plajı (BALIKESİR / EDREMİT)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Placeholder CTA -->
+        <div class="hero-reference-card card-placeholder">
+          <div class="reference-badge badge-placeholder">
+            <i class="fa-solid fa-plus-circle" aria-hidden="true"></i> Sıra Sizde
+          </div>
+          <blockquote class="reference-quote">
+            "Bir sonraki referans işletmemiz siz olabilirsiniz!"
+          </blockquote>
+          <div class="reference-meta">
+            <div class="reference-placeholder-icon">
+              <i class="fa-solid fa-store" aria-hidden="true"></i>
+            </div>
+            <div class="reference-info">
+              <div class="reference-name">Sizin İşletmeniz</div>
+              <a href="#iletisim" class="reference-cta-link">Bize Ulaşın <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
           </div>
         </div>
       </div>
@@ -231,10 +297,15 @@
       </div>
 
       <div class="field-grid">
-        <div class="field-image-container">
-          <img src="assets/images/waiter_using_app.png" alt="Sahada Garson Kullanımı" class="field-img">
-          <div class="field-badge">
-            <i class="fa-solid fa-badge-check" style="color: var(--secondary);" aria-hidden="true"></i> Canlı Sahada Kullanım
+        <div>
+          <div class="field-image-container">
+            <img src="assets/images/waiter_using_app.png" alt="Sahada Garson Kullanımı" class="field-img">
+            <div class="field-badge">
+              <i class="fa-solid fa-badge-check" style="color: var(--secondary);" aria-hidden="true"></i> Canlı Sahada Kullanım
+            </div>
+          </div>
+          <div class="field-image-caption">
+            Lura Beach (Zeytinli, Balıkesir) işletmesinde çekilmiştir.
           </div>
         </div>
 
@@ -342,6 +413,56 @@
       </div>
     </div>
   </footer>
+
+  <!-- Download Warning License Modal -->
+  <div class="modal-overlay" id="downloadModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Kapat" type="button">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-header-icon">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+
+      <h3 class="modal-title" id="modalTitle">Lisans Uyarısı</h3>
+
+      <p class="modal-text">
+        İndireceğiniz <strong>yiy.io</strong> otomasyon yazılımı geçerli bir lisans anahtarı olmadan <strong>çalışmayacaktır</strong>.
+      </p>
+
+      <div class="modal-license-box">
+        <div class="modal-license-info">
+          <i class="fa-solid fa-key modal-key-icon"></i>
+          <div>
+            <span class="modal-license-label">Lisans & Bilgi İletişim:</span>
+            <span class="modal-license-email">i.altay.ataman@gmail.com</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary modal-copy-btn" onclick="copyEmail('i.altay.ataman@gmail.com')" type="button">
+          <i class="fa-solid fa-copy"></i> Kopyala
+        </button>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalCancelBtn" type="button">Vazgeç</button>
+        <a href="https://github.com/AltayAtaman/yiy-io/archive/refs/heads/main.zip" class="btn btn-primary" id="modalConfirmDownloadBtn">
+          <i class="fa-solid fa-download"></i> Yine de İndir
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div class="image-lightbox-overlay" id="imageLightbox" aria-hidden="true">
+    <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Kapat" type="button">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Büyütülmüş Görsel">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
