@@ -1,0 +1,57 @@
+========================================================================
+  yiy.io KAFE KURULUM VE GÜVENLİK DUVARI (FIREWALL) KOMUTLARI
+========================================================================
+
+Bu komutları kafe bilgisayarında çalıştırmak için:
+1. Başlat menüsünü açın, "PowerShell" yazın.
+2. "Windows PowerShell" üzerine SAĞ TIKLAYIP "Yönetici Olarak Çalıştır" (Run as Administrator) seçin.
+3. İlgili komutları kopyalayıp yapıştırın ve Enter'a basın.
+
+------------------------------------------------------------------------
+1. GÜVENLİK DUVARI TÜM ENGELLEMELERİ KALDIR VE YİY-SERVER'A İZİN VER (ÖNERİLEN)
+------------------------------------------------------------------------
+PowerShell (Yönetici) ekranına yapıştırın:
+
+# Mevcut çakışan engelleme (Block) kurallarını temizle
+Get-NetFirewallRule | Where-Object { ($_.DisplayName -like '*node*' -or $_.DisplayName -like '*yiy*') -and $_.Action -eq 'Block' } | Remove-NetFirewallRule -ErrorAction SilentlyContinue
+
+# Port 5000 için her ağ türünde (Özel ve Ortak) giriş izni ver
+New-NetFirewallRule -DisplayName "yiy.io Port 5000 (TCP)" -Direction Inbound -LocalPort 5000 -Protocol TCP -Action Allow -Profile Any -ErrorAction SilentlyContinue
+
+# yiy-server.exe için doğrudan tam izin ver
+New-NetFirewallRule -DisplayName "yiy.io Sunucu (yiy-server.exe)" -Direction Inbound -Program "$PWD\yiy-server.exe" -Action Allow -Profile Any -ErrorAction SilentlyContinue
+
+Write-Host "`n[BASARILI] Guvenlik duvari izinleri verildi. Garson telefonlari baglanabilir!" -ForegroundColor Green
+
+
+------------------------------------------------------------------------
+2. BAĞLI WI-FI AĞINI "ÖZEL AĞ" (PRIVATE) OLARAK AYARLA
+------------------------------------------------------------------------
+Kafe Wi-Fi ağını güvenli yerel ağ moduna almak için:
+
+Get-NetConnectionProfile | Where-Object { $_.IPv4Connectivity -ne 'Disconnected' } | Set-NetConnectionProfile -NetworkCategory Private
+Write-Host "`n[BASARILI] Wi-Fi agi 'Ozel Ag' (Private) yapildi." -ForegroundColor Green
+
+
+------------------------------------------------------------------------
+3. KAFE BİLGİSAYARININ GÜNCEL IP ADRESİNİ ÖĞRENME
+------------------------------------------------------------------------
+Garson telefonlarının gireceği adresi kontrol etmek için:
+
+(Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias "Wi-Fi*").IPAddress
+# Örnek Çıktı: 192.168.1.100 -> Garson URL: http://192.168.1.100:5000/garson/
+
+
+------------------------------------------------------------------------
+4. SUNUCU ÇALIŞIYOR MU VE 5000 PORTUNU DİNLİYOR MU KONTROLÜ
+------------------------------------------------------------------------
+Test-NetConnection -ComputerName localhost -Port 5000
+
+
+========================================================================
+ÖZET ÇÖZÜM REHBERİ (GARSON TELEFONU AÇILMAZSA):
+========================================================================
+1. Garson telefonunda "Hücresel Veri" (Mobil Veri) kapatılmalıdır.
+2. Telefon ve Kafe Bilgisayarı AYNI Wi-Fi ağına bağlı olmalıdır.
+3. Telefon tarayıcısına kafe bilgisayarının güncel IP adresi girilmelidir (Örn: http://192.168.1.XX:5000/garson/).
+========================================================================
