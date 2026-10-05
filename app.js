@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSoundLabel = document.getElementById('heroSoundLabel');
   const videoOverlaySoundBtn = document.getElementById('videoOverlaySoundBtn');
   const overlaySoundIcon = document.getElementById('overlaySoundIcon');
-  const overlaySoundText = document.getElementById('overlaySoundText');
+  const videoOverlayFullscreenBtn = document.getElementById('videoOverlayFullscreenBtn');
 
   if (!heroPromoVideo) return;
 
@@ -172,17 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e) e.stopPropagation();
     heroPromoVideo.muted = !heroPromoVideo.muted;
     const isMuted = heroPromoVideo.muted;
-
-    // Update header button
-    if (heroSoundIcon) {
-      heroSoundIcon.className = isMuted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
-    }
-    if (heroSoundLabel) {
-      heroSoundLabel.textContent = isMuted ? 'Sesi Aç' : 'Sesi Kapat';
-    }
-    if (heroSoundToggleBtn) {
-      heroSoundToggleBtn.classList.toggle('active', !isMuted);
-    }
 
     // Update overlay pill
     if (overlaySoundIcon) {
@@ -195,6 +184,61 @@ document.addEventListener('DOMContentLoaded', () => {
       videoOverlaySoundBtn.classList.toggle('unmuted', !isMuted);
     }
   }
+
+  // Video Lightbox Modal (Option 2)
+  const videoLightbox = document.getElementById('videoLightbox');
+  const videoLightboxCloseBtn = document.getElementById('videoLightboxCloseBtn');
+  const lightboxVideo = document.getElementById('lightboxVideo');
+
+  function openVideoLightbox(e) {
+    if (e) e.stopPropagation();
+    if (!videoLightbox || !lightboxVideo) return;
+
+    // Sync playback time and play with audio
+    lightboxVideo.currentTime = heroPromoVideo.currentTime;
+    heroPromoVideo.pause();
+    
+    videoLightbox.classList.add('active');
+    videoLightbox.setAttribute('aria-hidden', 'false');
+    
+    lightboxVideo.muted = false;
+    lightboxVideo.play().catch(() => {
+      // Autoplay with sound fallback if browser restricts
+      lightboxVideo.muted = true;
+      lightboxVideo.play();
+    });
+  }
+
+  function closeVideoLightbox() {
+    if (!videoLightbox || !lightboxVideo) return;
+    
+    videoLightbox.classList.remove('active');
+    videoLightbox.setAttribute('aria-hidden', 'true');
+    
+    // Sync time back to hero promo and resume background play
+    heroPromoVideo.currentTime = lightboxVideo.currentTime;
+    lightboxVideo.pause();
+    heroPromoVideo.play().catch(() => {});
+  }
+
+  // Click on video itself or fullscreen button opens lightbox modal
+  heroPromoVideo.addEventListener('click', openVideoLightbox);
+  if (videoOverlayFullscreenBtn) videoOverlayFullscreenBtn.addEventListener('click', openVideoLightbox);
+  if (videoLightboxCloseBtn) videoLightboxCloseBtn.addEventListener('click', closeVideoLightbox);
+
+  if (videoLightbox) {
+    videoLightbox.addEventListener('click', (e) => {
+      if (e.target === videoLightbox || e.target === videoLightboxCloseBtn) {
+        closeVideoLightbox();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoLightbox && videoLightbox.classList.contains('active')) {
+      closeVideoLightbox();
+    }
+  });
 
   if (heroSoundToggleBtn) heroSoundToggleBtn.addEventListener('click', toggleVideoSound);
   if (videoOverlaySoundBtn) videoOverlaySoundBtn.addEventListener('click', toggleVideoSound);

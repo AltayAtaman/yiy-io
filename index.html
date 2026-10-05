@@ -126,17 +126,13 @@
           <div class="hero-visual">
             <div class="mockup-container">
               <div class="mockup-header">
-                <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                <div style="display: flex; align-items: center; justify-content: flex-start; width: 100%;">
                   <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <div class="dot dot-red"></div>
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
                     <span style="font-size: 0.8rem; color: var(--text-dim); margin-left: 0.5rem;">yiy.io Tanıtım & Saha Demosu</span>
                   </div>
-                  <button id="heroSoundToggleBtn" class="hero-sound-toggle-btn" type="button" aria-label="Sesi Aç veya Kapat">
-                    <i class="fa-solid fa-volume-xmark" id="heroSoundIcon" aria-hidden="true"></i>
-                    <span id="heroSoundLabel">Sesi Aç</span>
-                  </button>
                 </div>
               </div>
 
@@ -154,21 +150,17 @@
                   Tarayıcınız video oynatmayı desteklemiyor.
                 </video>
 
-                <!-- Video Overlay Sound Pill -->
-                <button id="videoOverlaySoundBtn" class="video-overlay-sound-btn" type="button" aria-label="Sesi Aç veya Kapat">
-                  <i class="fa-solid fa-volume-xmark" id="overlaySoundIcon" aria-hidden="true"></i>
-                  <span id="overlaySoundText">Sesi Aç</span>
-                </button>
-              </div>
-            </div>
-
-            <div class="floating-badge">
-              <div class="badge-icon">
-                <i class="fa-solid fa-wifi" aria-hidden="true"></i>
-              </div>
-              <div>
-                <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">Kesintisiz Yerel Ağ</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">İnternetsiz Wi-Fi Üzerinden Garson Bağlantısı</div>
+                <!-- Video Overlay Controls (Sound & Fullscreen) -->
+                <div class="video-overlay-controls">
+                  <button id="videoOverlaySoundBtn" class="video-overlay-btn video-overlay-sound-btn" type="button" aria-label="Sesi Aç veya Kapat">
+                    <i class="fa-solid fa-volume-xmark" id="overlaySoundIcon" aria-hidden="true"></i>
+                    <span id="overlaySoundText">Sesi Aç</span>
+                  </button>
+                  <button id="videoOverlayFullscreenBtn" class="video-overlay-btn video-overlay-fullscreen-btn" type="button" aria-label="Tam Ekran İzle">
+                    <i class="fa-solid fa-expand" aria-hidden="true"></i>
+                    <span>Tam Ekran</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -512,6 +504,20 @@
     <div class="lightbox-content">
       <img id="lightboxImg" src="" alt="Büyütülmüş Görsel">
       <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- Video Lightbox Modal (Option 2) -->
+  <div class="video-lightbox-overlay" id="videoLightbox" aria-hidden="true">
+    <button class="lightbox-close-btn" id="videoLightboxCloseBtn" aria-label="Kapat" type="button">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="video-lightbox-content">
+      <video id="lightboxVideo" class="lightbox-video" playsinline controls preload="auto">
+        <source src="assets/video/yiy-io-promo.mp4" type="video/mp4">
+        Tarayıcınız video oynatmayı desteklemiyor.
+      </video>
+      <div class="lightbox-caption">yiy.io — Tanıtım &amp; Saha Demosu</div>
     </div>
   </div>
 
