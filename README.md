@@ -37,7 +37,8 @@
 
 ### 📞 Lisans & İletişim
 
-Detaylı bilgi, ücretsiz deneme lisansı, özel geliştirme ve teknik destek talepleriniz için **Bionluk** üzerinden doğrudan iletişime geçebilirsiniz:
+Detaylı bilgi, ücretsiz deneme lisansı, özel geliştirme ve teknik destek talepleriniz için doğrudan e-posta ile iletişime geçebilirsiniz:
 
-* 🛍️ **Bionluk İlanı**: [İşletmenize Özel Yönetim Paneli & Otomasyon Geliştirme](https://bionluk.com/i_altay/isletmenize-ozel-yonetim-paneli-gelistiririm-872901)
-* 👤 **Bionluk Profil**: [bionluk.com/i_altay](https://bionluk.com/i_altay)
+* ✉️ **E-posta**: [i.altay.ataman@gmail.com](mailto:i.altay.ataman@gmail.com)
+* 💼 **LinkedIn**: [ismailaltayataman](https://www.linkedin.com/in/ismailaltayataman)
+
