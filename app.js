@@ -1,8 +1,71 @@
 /* ==========================================================================
-   yiy.io - Mobile Menu & Clipboard Helper Script
+   yiy.io - Bilingual (TR/EN), Mobile Menu, Modals & Presentation Script
    ========================================================================== */
 
+let currentLanguage = localStorage.getItem('yiy_lang') || 'tr';
+
+function getNestedTranslation(obj, path) {
+  return path.split('.').reduce((prev, curr) => (prev ? prev[curr] : undefined), obj);
+}
+
+function applyLanguage(lang) {
+  if (typeof yiyTranslations === 'undefined' || !yiyTranslations[lang]) return;
+  currentLanguage = lang;
+  localStorage.setItem('yiy_lang', lang);
+  document.documentElement.lang = lang;
+
+  const t = yiyTranslations[lang];
+
+  // Update Page Title and Meta Description
+  if (t.meta) {
+    document.title = t.meta.title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.meta.description);
+  }
+
+  // Update all text elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const val = getNestedTranslation(t, key);
+    if (val !== undefined) {
+      el.innerHTML = val;
+    }
+  });
+
+  // Update elements with data-i18n-aria
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-aria');
+    const val = getNestedTranslation(t, key);
+    if (val !== undefined) {
+      el.setAttribute('aria-label', val);
+    }
+  });
+
+  // Update active state of language buttons
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+
+  // Sync Video Overlay Sound Text
+  const heroVideo = document.getElementById('heroPromoVideo');
+  const soundText = document.getElementById('overlaySoundText');
+  if (heroVideo && soundText && t.hero) {
+    soundText.textContent = heroVideo.muted ? t.hero.soundUnmute : t.hero.soundMute;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Language Switcher Button Event Listeners
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const selectedLang = e.currentTarget.getAttribute('data-lang');
+      applyLanguage(selectedLang);
+    });
+  });
+
+  // Apply initial language from storage/default
+  applyLanguage(currentLanguage);
+
   // Mobile Hamburger Menu Toggle
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navLinks = document.getElementById('navLinks');
@@ -127,20 +190,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Safe Copy Email / Contact Helper (with HTTP fallback)
+// Safe Copy Email / Contact Helper (with HTTP fallback & localization)
 function copyEmail(email) {
+  const isEn = currentLanguage === 'en';
+  const successMsg = isEn 
+    ? 'Email address copied to clipboard: ' + email 
+    : 'E-posta adresi panoya kopyalandı: ' + email;
+
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(email).then(() => {
-      alert('E-posta adresi panoya kopyalandı: ' + email);
+      alert(successMsg);
     }).catch(() => {
-      fallbackCopyEmail(email);
+      fallbackCopyEmail(email, isEn);
     });
   } else {
-    fallbackCopyEmail(email);
+    fallbackCopyEmail(email, isEn);
   }
 }
 
-function fallbackCopyEmail(email) {
+function fallbackCopyEmail(email, isEn) {
+  const successMsg = isEn 
+    ? 'Email address copied to clipboard: ' + email 
+    : 'E-posta adresi panoya kopyalandı: ' + email;
+  const promptMsg = isEn 
+    ? 'Copy email address:' 
+    : 'E-posta adresini kopyalayın:';
+
   const textArea = document.createElement('textarea');
   textArea.value = email;
   textArea.style.position = 'fixed';
@@ -149,9 +224,9 @@ function fallbackCopyEmail(email) {
   textArea.select();
   try {
     document.execCommand('copy');
-    alert('E-posta adresi panoya kopyalandı: ' + email);
+    alert(successMsg);
   } catch (e) {
-    prompt('E-posta adresini kopyalayın:', email);
+    prompt(promptMsg, email);
   }
   document.body.removeChild(textArea);
 }
@@ -160,10 +235,9 @@ function fallbackCopyEmail(email) {
 document.addEventListener('DOMContentLoaded', () => {
   const heroPromoVideo = document.getElementById('heroPromoVideo');
   const heroSoundToggleBtn = document.getElementById('heroSoundToggleBtn');
-  const heroSoundIcon = document.getElementById('heroSoundIcon');
-  const heroSoundLabel = document.getElementById('heroSoundLabel');
   const videoOverlaySoundBtn = document.getElementById('videoOverlaySoundBtn');
   const overlaySoundIcon = document.getElementById('overlaySoundIcon');
+  const overlaySoundText = document.getElementById('overlaySoundText');
   const videoOverlayFullscreenBtn = document.getElementById('videoOverlayFullscreenBtn');
 
   if (!heroPromoVideo) return;
@@ -178,7 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
       overlaySoundIcon.className = isMuted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
     }
     if (overlaySoundText) {
-      overlaySoundText.textContent = isMuted ? 'Sesi Aç' : 'Sesi Kapat';
+      const t = (typeof yiyTranslations !== 'undefined' && yiyTranslations[currentLanguage]) ? yiyTranslations[currentLanguage] : null;
+      const unmuteStr = t && t.hero ? t.hero.soundUnmute : 'Sesi Aç';
+      const muteStr = t && t.hero ? t.hero.soundMute : 'Sesi Kapat';
+      overlaySoundText.textContent = isMuted ? unmuteStr : muteStr;
     }
     if (videoOverlaySoundBtn) {
       videoOverlaySoundBtn.classList.toggle('unmuted', !isMuted);
@@ -194,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e) e.stopPropagation();
     if (!videoLightbox || !lightboxVideo) return;
 
-    // Sync playback time and play with audio
     lightboxVideo.currentTime = heroPromoVideo.currentTime;
     heroPromoVideo.pause();
     
@@ -203,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     lightboxVideo.muted = false;
     lightboxVideo.play().catch(() => {
-      // Autoplay with sound fallback if browser restricts
       lightboxVideo.muted = true;
       lightboxVideo.play();
     });
@@ -215,13 +290,11 @@ document.addEventListener('DOMContentLoaded', () => {
     videoLightbox.classList.remove('active');
     videoLightbox.setAttribute('aria-hidden', 'true');
     
-    // Sync time back to hero promo and resume background play
     heroPromoVideo.currentTime = lightboxVideo.currentTime;
     lightboxVideo.pause();
     heroPromoVideo.play().catch(() => {});
   }
 
-  // Click on video itself or fullscreen button opens lightbox modal
   heroPromoVideo.addEventListener('click', openVideoLightbox);
   if (videoOverlayFullscreenBtn) videoOverlayFullscreenBtn.addEventListener('click', openVideoLightbox);
   if (videoLightboxCloseBtn) videoLightboxCloseBtn.addEventListener('click', closeVideoLightbox);
@@ -268,7 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initStars();
   }
 
-  // --- 1. Ambient Twinkling Stars in Sky ---
   let stars = [];
   function initStars() {
     stars = [];
@@ -276,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < count; i++) {
       stars.push({
         x: Math.random() * width,
-        y: Math.random() * (height * 0.48), // sky region
+        y: Math.random() * (height * 0.48),
         baseAlpha: Math.random() * 0.6 + 0.2,
         twinkleSpeed: 0.02 + Math.random() * 0.03,
         phase: Math.random() * Math.PI * 2,
@@ -285,12 +357,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- 2. Shooting Stars (Streaking across twilight sky) ---
   let shootingStars = [];
   let nextShootingStarTime = Date.now() + 1500;
 
   function spawnShootingStar() {
-    const angle = (25 + Math.random() * 20) * (Math.PI / 180); // gentle downward diagonal
+    const angle = (25 + Math.random() * 20) * (Math.PI / 180);
     const speed = 14 + Math.random() * 10;
     shootingStars.push({
       x: Math.random() * (width * 0.8),
@@ -304,15 +375,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 3. Living Shoreline Ocean Waves ---
-  // Waves glide forward onto wet sand, foam washes up, then smoothly recedes
   const waveLayers = [
     { baseYRel: 0.88, amp: 22, freq: 0.0035, speed: 0.0016, color: 'rgba(255, 255, 255, 0.16)', foam: 'rgba(255, 255, 255, 0.45)', phase: 0 },
     { baseYRel: 0.82, amp: 18, freq: 0.0045, speed: 0.0019, color: 'rgba(125, 211, 252, 0.12)', foam: 'rgba(224, 242, 254, 0.35)', phase: 1.8 },
     { baseYRel: 0.76, amp: 14, freq: 0.0055, speed: 0.0022, color: 'rgba(6, 182, 212, 0.08)', foam: 'rgba(186, 230, 253, 0.25)', phase: 3.5 }
   ];
 
-  // Glistening foam sparkles left on wet sand
   let wetSandSparkles = [];
   function addSparkles(x, y) {
     if (wetSandSparkles.length < 50 && Math.random() < 0.25) {
@@ -329,7 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function render(time) {
     ctx.clearRect(0, 0, width, height);
 
-    // Render Twinkling Stars
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];
       const a = s.baseAlpha + Math.sin(time * s.twinkleSpeed + s.phase) * 0.35;
@@ -342,10 +409,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     ctx.shadowBlur = 0;
 
-    // Spawn & Render Shooting Stars
     if (Date.now() > nextShootingStarTime) {
       spawnShootingStar();
-      nextShootingStarTime = Date.now() + 3000 + Math.random() * 4000; // next in 3-7s
+      nextShootingStarTime = Date.now() + 3000 + Math.random() * 4000;
     }
 
     for (let i = shootingStars.length - 1; i >= 0; i--) {
@@ -362,7 +428,6 @@ document.addEventListener('DOMContentLoaded', () => {
         continue;
       }
 
-      // Draw shooting star luminous streak
       const tailX = ss.x - (ss.vx / Math.hypot(ss.vx, ss.vy)) * ss.len;
       const tailY = ss.y - (ss.vy / Math.hypot(ss.vx, ss.vy)) * ss.len;
 
@@ -378,7 +443,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.lineWidth = 1.8;
       ctx.stroke();
 
-      // Glowing head
       ctx.beginPath();
       ctx.arc(ss.x, ss.y, 2.2, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
@@ -388,9 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.shadowBlur = 0;
     }
 
-    // Render Living Ocean Shoreline Waves (Tide coming & going)
-    // Tide cycle: period ~ 7.5 seconds
-    const tideMotion = Math.sin(time * 0.00085); // -1 (ebb) to +1 (flow)
+    const tideMotion = Math.sin(time * 0.00085);
 
     for (let l = 0; l < waveLayers.length; l++) {
       const layer = waveLayers[l];
@@ -401,7 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.moveTo(0, height);
       ctx.lineTo(0, baseY);
 
-      // Generate undulating wave curve along the shore
       for (let x = 0; x <= width; x += 15) {
         const waveY = baseY + 
           Math.sin(x * layer.freq + time * layer.speed + layer.phase) * 9 +
@@ -409,7 +470,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.lineTo(x, waveY);
 
-        // When tide is near peak, add foam sparkles
         if (tideMotion > 0.4 && x % 45 === 0) {
           addSparkles(x, waveY);
         }
@@ -418,11 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.lineTo(width, height);
       ctx.closePath();
 
-      // Translucent water body
       ctx.fillStyle = layer.color;
       ctx.fill();
 
-      // Frosted wave edge foam line
       ctx.strokeStyle = layer.foam;
       ctx.lineWidth = 2.2;
       ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
@@ -431,7 +489,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.shadowBlur = 0;
     }
 
-    // Render Glistening Foam Sparkles on Shore
     for (let i = wetSandSparkles.length - 1; i >= 0; i--) {
       const sp = wetSandSparkles[i];
       sp.alpha -= sp.decay;
@@ -492,10 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
     isTransitioning = true;
     currentSlide = index;
 
-    // Slide track transition
     slidesTrack.style.transform = `translateX(-${currentSlide * 100}vw)`;
 
-    // Update active classes on slide sections
     slideSections.forEach((section, i) => {
       if (i === currentSlide) {
         section.classList.add('active');
@@ -505,7 +560,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Update Prev / Next button states
     if (slidePrevBtn) {
       slidePrevBtn.disabled = currentSlide === 0;
     }
@@ -513,19 +567,16 @@ document.addEventListener('DOMContentLoaded', () => {
       slideNextBtn.disabled = currentSlide === totalSlides - 1;
     }
 
-    // Update Navbar Link active state
     navLinkItems.forEach((link) => {
       const sIndex = Number(link.dataset.slide);
       link.classList.toggle('active', sIndex === currentSlide);
     });
 
-    // Update URL hash safely without vertical scroll jump
     const currentId = slideSections[currentSlide]?.id;
     if (currentId && window.history && window.history.replaceState) {
       window.history.replaceState(null, '', '#' + currentId);
     }
 
-    // Close mobile hamburger menu if open
     if (navLinks && navLinks.classList.contains('open')) {
       navLinks.classList.remove('open');
       if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
@@ -536,7 +587,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 700);
   }
 
-  // Floating Arrow Button Listeners
   if (slidePrevBtn) {
     slidePrevBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -551,7 +601,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Intercept all hash links pointing to slides
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href^="#"]');
     if (!link) return;
@@ -568,9 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    // Avoid interfering with modals or typing
     const isModalOpen = document.querySelector('.modal-overlay.active, .image-lightbox-overlay.active');
     if (isModalOpen) return;
     if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
@@ -586,7 +633,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mouse Wheel / Trackpad navigation (debounced, supports internal slide scroll)
   let lastWheelTime = 0;
   window.addEventListener('wheel', (e) => {
     const isModalOpen = document.querySelector('.modal-overlay.active, .image-lightbox-overlay.active');
@@ -594,7 +640,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const activeSlide = slideSections[currentSlide];
     if (activeSlide) {
-      // If active slide has internal overflow room, allow standard scroll first
       const canScrollDown = activeSlide.scrollTop + activeSlide.clientHeight < activeSlide.scrollHeight - 12;
       const canScrollUp = activeSlide.scrollTop > 12;
 
@@ -620,7 +665,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  // Touch Swipe Gesture Support
   let touchStartX = 0;
   let touchStartY = 0;
   let touchStartTime = 0;
@@ -644,15 +688,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && deltaTime < 650) {
         if (deltaX < 0) {
-          goToSlide(currentSlide + 1); // Swipe left -> Next
+          goToSlide(currentSlide + 1);
         } else {
-          goToSlide(currentSlide - 1); // Swipe right -> Prev
+          goToSlide(currentSlide - 1);
         }
       }
     }
   }, { passive: true });
 
-  // Check URL hash on page load
   const initialHash = window.location.hash.replace('#', '');
   if (initialHash && initialHash in slideIdMap) {
     goToSlide(slideIdMap[initialHash]);
@@ -660,5 +703,3 @@ document.addEventListener('DOMContentLoaded', () => {
     goToSlide(0);
   }
 });
-
-

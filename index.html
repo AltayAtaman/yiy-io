@@ -51,24 +51,31 @@
       </a>
 
       <!-- Mobile Hamburger Button -->
-      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menüyü Aç">
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menüyü Aç" data-i18n-aria="nav.hamburgerAria">
         <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
 
       <nav aria-label="Ana Navigasyon">
         <ul class="nav-links" id="navLinks">
-          <li><a href="#hero" class="nav-link-item active" data-slide="0">Giriş</a></li>
-          <li><a href="#referanslar" class="nav-link-item" data-slide="1">Geri Bildirim</a></li>
-          <li><a href="#ozellikler" class="nav-link-item" data-slide="2">Özellikler</a></li>
-          <li><a href="#mobil" class="nav-link-item" data-slide="3">Mobil Garson</a></li>
-          <li><a href="#saha" class="nav-link-item" data-slide="4">Saha Deneyimi</a></li>
-          <li><a href="#kurulum" class="nav-link-item" data-slide="5">Hızlı Başlangıç</a></li>
-          <li><a href="#iletisim" class="nav-link-item" data-slide="6">İletişim & Lisans</a></li>
+          <li><a href="#hero" class="nav-link-item active" data-slide="0" data-i18n="nav.intro">Giriş</a></li>
+          <li><a href="#referanslar" class="nav-link-item" data-slide="1" data-i18n="nav.feedback">Geri Bildirim</a></li>
+          <li><a href="#ozellikler" class="nav-link-item" data-slide="2" data-i18n="nav.features">Özellikler</a></li>
+          <li><a href="#mobil" class="nav-link-item" data-slide="3" data-i18n="nav.mobile">Mobil Garson</a></li>
+          <li><a href="#saha" class="nav-link-item" data-slide="4" data-i18n="nav.field">Saha Deneyimi</a></li>
+          <li><a href="#kurulum" class="nav-link-item" data-slide="5" data-i18n="nav.setup">Hızlı Başlangıç</a></li>
+          <li><a href="#iletisim" class="nav-link-item" data-slide="6" data-i18n="nav.contact">İletişim & Lisans</a></li>
         </ul>
       </nav>
 
       <div class="nav-actions">
-        <a href="https://github.com/AltayAtaman/yiy-io/archive/refs/heads/main.zip" class="btn btn-primary" id="nav-download-btn">
+        <!-- Language Switcher -->
+        <div class="lang-switch" role="group" aria-label="Dil Seçimi / Language Selection">
+          <button type="button" class="lang-btn active" id="lang-tr" data-lang="tr" aria-label="Türkçe">TR</button>
+          <span class="lang-divider">|</span>
+          <button type="button" class="lang-btn" id="lang-en" data-lang="en" aria-label="English">EN</button>
+        </div>
+
+        <a href="https://github.com/AltayAtaman/yiy-io/archive/refs/heads/main.zip" class="btn btn-primary" id="nav-download-btn" data-i18n="nav.download">
           <i class="fa-solid fa-download" aria-hidden="true"></i> İndir (ZIP)
         </a>
       </div>
@@ -83,42 +90,42 @@
       <section class="slide-section hero-slide active" id="hero" data-index="0">
         <div class="container hero-grid">
           <div class="hero-content">
-            <div class="section-tag">
+            <div class="section-tag" data-i18n="hero.tag">
               <i class="fa-solid fa-bolt" aria-hidden="true"></i> %100 Çevrimdışı & Sıfır Bulut Bağımlılığı
             </div>
-            <h1>Akıllı Kafe & İşletme <span class="gradient-text">Otomasyon Sistemi</span></h1>
+            <h1 data-i18n="hero.title">Akıllı Kafe & İşletme <span class="gradient-text">Otomasyon Sistemi</span></h1>
             
             <div class="motto-box">
               <i class="fa-solid fa-quote-left motto-icon" aria-hidden="true"></i>
-              <span class="motto-text">Masadan mutfağa en kısa yol</span>
+              <span class="motto-text" data-i18n="hero.motto">Masadan mutfağa en kısa yol</span>
               <i class="fa-solid fa-quote-right motto-icon" aria-hidden="true"></i>
             </div>
 
-            <p class="hero-subtitle">
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
               <strong>yiy.io</strong>, kafeler ve restoranlar için geliştirilmiş ultra hızlı, çevrimdışı (offline-first) çalışan masa & sipariş takibi platformudur. İnternet kesilse dahi işiniz asla durmaz!
             </p>
 
             <div class="hero-ctas">
-              <a href="https://github.com/AltayAtaman/yiy-io/archive/refs/heads/main.zip" class="btn btn-primary" id="hero-download-btn">
+              <a href="https://github.com/AltayAtaman/yiy-io/archive/refs/heads/main.zip" class="btn btn-primary" id="hero-download-btn" data-i18n="hero.btnDownload">
                 <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i> Hemen Ücretsiz İndir
               </a>
-              <a href="mailto:i.altay.ataman@gmail.com?subject=yiy.io%20Lisans%20ve%20Destek%20Talebi" class="btn btn-secondary" id="hero-contact-btn">
+              <a href="mailto:i.altay.ataman@gmail.com?subject=yiy.io%20Lisans%20ve%20Destek%20Talebi" class="btn btn-secondary" id="hero-contact-btn" data-i18n="hero.btnContact">
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i> Lisans & İletişim (E-posta)
               </a>
             </div>
 
             <div class="hero-stats">
               <div class="stat-item">
-                <span class="stat-number">0 ms</span>
-                <span class="stat-label">Bulut Gecikmesi</span>
+                <span class="stat-number" data-i18n="hero.stat1Num">0 ms</span>
+                <span class="stat-label" data-i18n="hero.stat1Label">Bulut Gecikmesi</span>
               </div>
               <div class="stat-item">
-                <span class="stat-number">%100</span>
-                <span class="stat-label">Offline Çalışma</span>
+                <span class="stat-number" data-i18n="hero.stat2Num">%100</span>
+                <span class="stat-label" data-i18n="hero.stat2Label">Offline Çalışma</span>
               </div>
               <div class="stat-item">
-                <span class="stat-number">Tek-Tık</span>
-                <span class="stat-label">Kurulum (.exe)</span>
+                <span class="stat-number" data-i18n="hero.stat3Num">Tek-Tık</span>
+                <span class="stat-label" data-i18n="hero.stat3Label">Kurulum (.exe)</span>
               </div>
             </div>
           </div>
@@ -131,7 +138,7 @@
                     <div class="dot dot-red"></div>
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
-                    <span style="font-size: 0.8rem; color: var(--text-dim); margin-left: 0.5rem;">yiy.io Tanıtım & Saha Demosu</span>
+                    <span style="font-size: 0.8rem; color: var(--text-dim); margin-left: 0.5rem;" data-i18n="hero.demoTitle">yiy.io Tanıtım & Saha Demosu</span>
                   </div>
                 </div>
               </div>
@@ -154,11 +161,11 @@
                 <div class="video-overlay-controls">
                   <button id="videoOverlaySoundBtn" class="video-overlay-btn video-overlay-sound-btn" type="button" aria-label="Sesi Aç veya Kapat">
                     <i class="fa-solid fa-volume-xmark" id="overlaySoundIcon" aria-hidden="true"></i>
-                    <span id="overlaySoundText">Sesi Aç</span>
+                    <span id="overlaySoundText" data-i18n="hero.soundUnmute">Sesi Aç</span>
                   </button>
                   <button id="videoOverlayFullscreenBtn" class="video-overlay-btn video-overlay-fullscreen-btn" type="button" aria-label="Tam Ekran İzle">
                     <i class="fa-solid fa-expand" aria-hidden="true"></i>
-                    <span>Tam Ekran</span>
+                    <span data-i18n="hero.fullscreen">Tam Ekran</span>
                   </button>
                 </div>
               </div>
@@ -171,18 +178,18 @@
       <section class="slide-section reference-slide" id="referanslar" data-index="1">
         <div class="container">
           <div class="section-header">
-            <div class="section-tag"><i class="fa-solid fa-comments" aria-hidden="true"></i> Sahadan Geri Bildirimler</div>
-            <h2>Aktif İşletme Yorumları</h2>
-            <p>Sahada aktif olarak kullanılan yiy.io hakkında işletme ve garson yorumları.</p>
+            <div class="section-tag" data-i18n="feedback.tag"><i class="fa-solid fa-comments" aria-hidden="true"></i> Sahadan Geri Bildirimler</div>
+            <h2 data-i18n="feedback.title">Aktif İşletme Yorumları</h2>
+            <p data-i18n="feedback.desc">Sahada aktif olarak kullanılan yiy.io hakkında işletme ve garson yorumları.</p>
           </div>
 
           <div class="reference-cards-grid">
             <!-- Card 1: Placeholder CTA -->
             <div class="hero-reference-card card-placeholder">
-              <div class="reference-badge badge-placeholder">
+              <div class="reference-badge badge-placeholder" data-i18n="feedback.card1Badge">
                 <i class="fa-solid fa-plus-circle" aria-hidden="true"></i> Sıra Sizde
               </div>
-              <blockquote class="reference-quote">
+              <blockquote class="reference-quote" data-i18n="feedback.card1Quote">
                 "Bir sonraki referans işletmemiz siz olabilirsiniz!"
               </blockquote>
               <div class="reference-meta">
@@ -190,18 +197,18 @@
                   <i class="fa-solid fa-store" aria-hidden="true"></i>
                 </div>
                 <div class="reference-info">
-                  <div class="reference-name">Sizin İşletmeniz</div>
-                  <a href="#iletisim" class="reference-cta-link">Bize Ulaşın <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                  <div class="reference-name" data-i18n="feedback.card1Name">Sizin İşletmeniz</div>
+                  <a href="#iletisim" class="reference-cta-link" data-i18n="feedback.card1Cta">Bize Ulaşın <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
               </div>
             </div>
 
             <!-- Card 2: Featured Active Testimonial (Lura Beach) -->
             <div class="hero-reference-card card-featured">
-              <div class="reference-badge">
+              <div class="reference-badge" data-i18n="feedback.card2Badge">
                 <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Canlı Saha Kullanımı
               </div>
-              <blockquote class="reference-quote">
+              <blockquote class="reference-quote" data-i18n="feedback.card2Quote">
                 "Plaj ve masa siparişlerimizi garsonlarımız saniyeler içinde mutfağa aktarıyor. Yoğun sezonda internet kopsa bile kesintisiz çalıştık."
               </blockquote>
               <div class="reference-meta">
@@ -209,17 +216,17 @@
                 <div class="reference-info">
                   <div class="reference-name">Mücahit Işık</div>
                   <div class="reference-company">Lura Beach</div>
-                  <div class="reference-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Zeytinli, Altınkum Plajı (BALIKESİR / EDREMİT)</div>
+                  <div class="reference-location" data-i18n="feedback.card2Location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Zeytinli, Altınkum Plajı (BALIKESİR / EDREMİT)</div>
                 </div>
               </div>
             </div>
 
             <!-- Card 3: Placeholder CTA -->
             <div class="hero-reference-card card-placeholder">
-              <div class="reference-badge badge-placeholder">
+              <div class="reference-badge badge-placeholder" data-i18n="feedback.card1Badge">
                 <i class="fa-solid fa-plus-circle" aria-hidden="true"></i> Sıra Sizde
               </div>
-              <blockquote class="reference-quote">
+              <blockquote class="reference-quote" data-i18n="feedback.card1Quote">
                 "Bir sonraki referans işletmemiz siz olabilirsiniz!"
               </blockquote>
               <div class="reference-meta">
@@ -227,8 +234,8 @@
                   <i class="fa-solid fa-store" aria-hidden="true"></i>
                 </div>
                 <div class="reference-info">
-                  <div class="reference-name">Sizin İşletmeniz</div>
-                  <a href="#iletisim" class="reference-cta-link">Bize Ulaşın <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                  <div class="reference-name" data-i18n="feedback.card1Name">Sizin İşletmeniz</div>
+                  <a href="#iletisim" class="reference-cta-link" data-i18n="feedback.card1Cta">Bize Ulaşın <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
               </div>
             </div>
@@ -240,46 +247,46 @@
       <section class="slide-section features-slide" id="ozellikler" data-index="2">
         <div class="container">
           <div class="section-header">
-            <div class="section-tag"><i class="fa-solid fa-star" aria-hidden="true"></i> Neden yiy.io?</div>
-            <h2>İşletmenizi Hızlandıracak Üstün Özellikler</h2>
-            <p>Gereksiz aylık abonelik ücretleri ödemeden, işletmenize tam hakimiyet sağlayın.</p>
+            <div class="section-tag" data-i18n="features.tag"><i class="fa-solid fa-star" aria-hidden="true"></i> Neden yiy.io?</div>
+            <h2 data-i18n="features.title">İşletmenizi Hızlandıracak Üstün Özellikler</h2>
+            <p data-i18n="features.desc">Gereksiz aylık abonelik ücretleri ödemeden, işletmenize tam hakimiyet sağlayın.</p>
           </div>
 
           <div class="features-grid">
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-chair" aria-hidden="true"></i></div>
-              <h3>Masa & Bölge Yönetimi</h3>
-              <p>Salon, Teras, Bahçe gibi farklı alanlardaki masalarınızın anlık doluluk durumunu, kalan hesap miktarını tek ekrandan görün.</p>
+              <h3 data-i18n="features.f1Title">Masa & Bölge Yönetimi</h3>
+              <p data-i18n="features.f1Desc">Salon, Teras, Bahçe gibi farklı alanlardaki masalarınızın anlık doluluk durumunu, kalan hesap miktarını tek ekrandan görün.</p>
             </div>
 
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></div>
-              <h3>Mobil Garson Arayüzü</h3>
-              <p>Garsonlar herhangi bir akıllı telefon veya tabletten QR kod taratarak saniyeler içinde giriş yapabilir ve masada sipariş alabilir.</p>
+              <h3 data-i18n="features.f2Title">Mobil Garson Arayüzü</h3>
+              <p data-i18n="features.f2Desc">Garsonlar herhangi bir akıllı telefon veya tabletten QR kod taratarak saniyeler içinde giriş yapabilir ve masada sipariş alabilir.</p>
             </div>
 
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div>
-              <h3>%100 Çevrimdışı Güvencesi</h3>
-              <p>Verileriniz kendi bilgisayarınızdaki yerel veritabanında saklanır. İnternetiniz kopsa bile sipariş süreci kesintiye uğramaz.</p>
+              <h3 data-i18n="features.f3Title">%100 Çevrimdışı Güvencesi</h3>
+              <p data-i18n="features.f3Desc">Verileriniz kendi bilgisayarınızdaki yerel veritabanında saklanır. İnternetiniz kopsa bile sipariş süreci kesintiye uğramaz.</p>
             </div>
 
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div>
-              <h3>Detaylı Analiz & Raporlama</h3>
-              <p>Günlük toplam ciro, en çok satan ürünler, Nakit vs Kredi Kartı ödeme oranları ve masa bazlı sipariş geçmişi elinizin altında.</p>
+              <h3 data-i18n="features.f4Title">Detaylı Analiz & Raporlama</h3>
+              <p data-i18n="features.f4Desc">Günlük toplam ciro, en çok satan ürünler, Nakit vs Kredi Kartı ödeme oranları ve masa bazlı sipariş geçmişi elinizin altında.</p>
             </div>
 
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-cubes" aria-hidden="true"></i></div>
-              <h3>Sıfır Kurulum Karmaşası</h3>
-              <p>Karmaşık veritabanı sunucusu veya web hosting gerektirmez. Tek bir <code>yiy-server.exe</code> dosyası ile saniyeler içinde çalışır.</p>
+              <h3 data-i18n="features.f5Title">Sıfır Kurulum Karmaşası</h3>
+              <p data-i18n="features.f5Desc">Karmaşık veritabanı sunucusu veya web hosting gerektirmez. Tek bir <code>yiy-server.exe</code> dosyası ile saniyeler içinde çalışır.</p>
             </div>
 
             <div class="feature-card">
               <div class="feature-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
-              <h3>Tam Veri Gizliliği</h3>
-              <p>Müşteri ve ciro bilgileriniz hiçbir 3. taraf bulut sunucuya gönderilmez. Tüm veriniz %100 sizin denetiminizdedir.</p>
+              <h3 data-i18n="features.f6Title">Tam Veri Gizliliği</h3>
+              <p data-i18n="features.f6Desc">Müşteri ve ciro bilgileriniz hiçbir 3. taraf bulut sunucuya gönderilmez. Tüm veriniz %100 sizin denetiminizdedir.</p>
             </div>
           </div>
         </div>
@@ -289,24 +296,24 @@
       <section class="slide-section mobile-slide" id="mobil" data-index="3">
         <div class="container mobile-grid">
           <div>
-            <div class="section-tag"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Garson Telefon Modu</div>
-            <h2 style="font-size: 2.4rem; margin-bottom: 1.25rem;">Garsonlarınız Saniyeler İçinde Bağlansın</h2>
-            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">
+            <div class="section-tag" data-i18n="mobile.tag"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Garson Telefon Modu</div>
+            <h2 style="font-size: 2.4rem; margin-bottom: 1.25rem;" data-i18n="mobile.title">Garsonlarınız Saniyeler İçinde Bağlansın</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;" data-i18n="mobile.desc">
               Mobil garson arayüzü sayesinde pahalı ek sipariş terminallerine yatırım yapmanıza gerek kalmaz. Garsonlar kendi akıllı telefonlarından veya işletmeye ait tabletlerden sisteme bağlanabilir.
             </p>
 
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; color: var(--text-main);">
               <li style="display: flex; align-items: center; gap: 0.75rem;">
                 <i class="fa-solid fa-check" style="color: var(--secondary); background: rgba(16,185,129,0.1); padding: 0.4rem; border-radius: 50%;" aria-hidden="true"></i>
-                <span>QR Kod İle Anında Hızlı Giriş</span>
+                <span data-i18n="mobile.bullet1">QR Kod İle Anında Hızlı Giriş</span>
               </li>
               <li style="display: flex; align-items: center; gap: 0.75rem;">
                 <i class="fa-solid fa-check" style="color: var(--secondary); background: rgba(16,185,129,0.1); padding: 0.4rem; border-radius: 50%;" aria-hidden="true"></i>
-                <span>Kategori Bazlı Ürün Arama & Hızlı Ekleme</span>
+                <span data-i18n="mobile.bullet2">Kategori Bazlı Ürün Arama & Hızlı Ekleme</span>
               </li>
               <li style="display: flex; align-items: center; gap: 0.75rem;">
                 <i class="fa-solid fa-check" style="color: var(--secondary); background: rgba(16,185,129,0.1); padding: 0.4rem; border-radius: 50%;" aria-hidden="true"></i>
-                <span>Anlık Mutfak & Kasa Senkronizasyonu</span>
+                <span data-i18n="mobile.bullet3">Anlık Mutfak & Kasa Senkronizasyonu</span>
               </li>
             </ul>
           </div>
@@ -323,27 +330,27 @@
       <section class="slide-section field-slide" id="saha" data-index="4">
         <div class="container">
           <div class="section-header">
-            <div class="section-tag"><i class="fa-solid fa-camera" aria-hidden="true"></i> Saha Deneyimi</div>
-            <h2>Gerçek İşletme Ortamında Yüksek Performans</h2>
-            <p>yiy.io, gerçek kafe ve restoran ortamlarında garsonların hızına hız katmak için tasarlandı.</p>
+            <div class="section-tag" data-i18n="field.tag"><i class="fa-solid fa-camera" aria-hidden="true"></i> Saha Deneyimi</div>
+            <h2 data-i18n="field.title">Gerçek İşletme Ortamında Yüksek Performans</h2>
+            <p data-i18n="field.desc">yiy.io, gerçek kafe ve restoran ortamlarında garsonların hızına hız katmak için tasarlandı.</p>
           </div>
 
           <div class="field-grid">
             <div>
               <div class="field-image-container">
                 <img src="assets/images/waiter_using_app.png" alt="Sahada Garson Kullanımı" class="field-img">
-                <div class="field-badge">
+                <div class="field-badge" data-i18n="field.badge">
                   <i class="fa-solid fa-badge-check" style="color: var(--secondary);" aria-hidden="true"></i> Canlı Sahada Kullanım
                 </div>
               </div>
-              <div class="field-image-caption">
+              <div class="field-image-caption" data-i18n="field.caption">
                 Lura Beach (Zeytinli, Balıkesir) işletmesinde çekilmiştir.
               </div>
             </div>
 
             <div class="field-content">
-              <h3>Masada Kesintisiz & Hızlı Sipariş Alma</h3>
-              <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
+              <h3 data-i18n="field.heading">Masada Kesintisiz & Hızlı Sipariş Alma</h3>
+              <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;" data-i18n="field.subheading">
                 Garson masadayken siparişi dokunarak seçer, onayladığı an mutfaktaki ve kasadaki ekrana yansır. Garsonun kasaya gitmesine veya kağıt sipariş fişi yazmasına gerek kalmaz.
               </p>
 
@@ -351,24 +358,24 @@
                 <div class="field-feature-item">
                   <div class="field-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                   <div>
-                    <strong>Anında Mutfak İletimi</strong>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Siparişler anında mutfak veya bar ekranına düşer.</div>
+                    <strong data-i18n="field.item1Title">Anında Mutfak İletimi</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="field.item1Desc">Siparişler anında mutfak veya bar ekranına düşer.</div>
                   </div>
                 </div>
 
                 <div class="field-feature-item">
                   <div class="field-icon"><i class="fa-solid fa-mobile" aria-hidden="true"></i></div>
                   <div>
-                    <strong>Herhangi Bir Akıllı Telefon</strong>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">iOS ve Android tüm telefonlarda ekstra uygulama indirmeden tarayıcıdan çalışır.</div>
+                    <strong data-i18n="field.item2Title">Herhangi Bir Akıllı Telefon</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="field.item2Desc">iOS ve Android tüm telefonlarda ekstra uygulama indirmeden tarayıcıdan çalışır.</div>
                   </div>
                 </div>
 
                 <div class="field-feature-item">
                   <div class="field-icon"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i></div>
                   <div>
-                    <strong>Hafif & Kolay Kullanım</strong>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">Garsonların dakikalar içinde alışabileceği sade, büyük butonlu arayüz.</div>
+                    <strong data-i18n="field.item3Title">Hafif & Kolay Kullanım</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="field.item3Desc">Garsonların dakikalar içinde alışabileceği sade, büyük butonlu arayüz.</div>
                   </div>
                 </div>
               </div>
@@ -381,28 +388,28 @@
       <section class="slide-section setup-slide" id="kurulum" data-index="5">
         <div class="container">
           <div class="section-header">
-            <div class="section-tag"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Hızlı Başlangıç</div>
-            <h2>3 Adımda Sisteminizi Çalıştırın</h2>
-            <p>Hiçbir karmaşık sunucu veya veritabanı ayarı yapmadan hemen kullanmaya başlayın.</p>
+            <div class="section-tag" data-i18n="setup.tag"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Hızlı Başlangıç</div>
+            <h2 data-i18n="setup.title">3 Adımda Sisteminizi Çalıştırın</h2>
+            <p data-i18n="setup.desc">Hiçbir karmaşık sunucu veya veritabanı ayarı yapmadan hemen kullanmaya başlayın.</p>
           </div>
 
           <div class="steps-grid">
             <div class="step-card">
               <div class="step-num">01</div>
-              <h3>İndirin & Çıkarın</h3>
-              <p>Sağ üstteki "İndir" butonuna tıklayarak ZIP arşivini indirin ve bilgisayarınızda dilediğiniz bir klasöre çıkarın.</p>
+              <h3 data-i18n="setup.s1Title">İndirin & Çıkarın</h3>
+              <p data-i18n="setup.s1Desc">Sağ üstteki "İndir" butonuna tıklayarak ZIP arşivini indirin ve bilgisayarınızda dilediğiniz bir klasöre çıkarın.</p>
             </div>
 
             <div class="step-card">
               <div class="step-num">02</div>
-              <h3>`yiy-server.exe` Çalıştırın</h3>
-              <p>Klasör içindeki çalıştırılabilir dosyaya çift tıklayın. (Windows SmartScreen uyarısı verirse <em>"Daha fazla bilgi > Yine de çalıştır"</em> seçeneğine tıklayın).</p>
+              <h3 data-i18n="setup.s2Title">yiy-server.exe Çalıştırın</h3>
+              <p data-i18n="setup.s2Desc">Klasör içindeki çalıştırılabilir dosyaya çift tıklayın. (Windows SmartScreen uyarısı verirse <em>"Daha fazla bilgi > Yine de çalıştır"</em> seçeneğine tıklayın).</p>
             </div>
 
             <div class="step-card">
               <div class="step-num">03</div>
-              <h3>Garsonları Bağlayın</h3>
-              <p>Garson telefonunu işletme Wi-Fi ağına bağlayıp <code>http://localhost:3001</code> adresindeki Garson QR Kodunu taratın!</p>
+              <h3 data-i18n="setup.s3Title">Garsonları Bağlayın</h3>
+              <p data-i18n="setup.s3Desc">Garson telefonunu işletme Wi-Fi ağına bağlayıp <code>http://localhost:3001</code> adresindeki Garson QR Kodunu taratın!</p>
             </div>
           </div>
         </div>
@@ -412,18 +419,18 @@
       <section class="slide-section contact-slide" id="iletisim" data-index="6">
         <div class="container contact-slide-content">
           <div class="cta-box">
-            <div class="section-tag"><i class="fa-solid fa-headset" aria-hidden="true"></i> İletişim & Kurulum Desteği</div>
-            <h2>İşletmenize Özel Çözümler</h2>
-            <p>Özel geliştirme talepleri, deneme lisansı veya doğrudan kurulum desteği almak için iletişime geçebilirsiniz.</p>
+            <div class="section-tag" data-i18n="contact.tag"><i class="fa-solid fa-headset" aria-hidden="true"></i> İletişim & Kurulum Desteği</div>
+            <h2 data-i18n="contact.title">İşletmenize Özel Çözümler</h2>
+            <p data-i18n="contact.desc">Özel geliştirme talepleri, deneme lisansı veya doğrudan kurulum desteği almak için iletişime geçebilirsiniz.</p>
 
             <div class="contact-links-grid">
-              <a href="mailto:i.altay.ataman@gmail.com?subject=yiy.io%20%C4%B0leti%C5%9Fim%20ve%20Destek" class="btn btn-primary">
+              <a href="mailto:i.altay.ataman@gmail.com?subject=yiy.io%20%C4%B0leti%C5%9Fim%20ve%20Destek" class="btn btn-primary" data-i18n="contact.sendEmail">
                 <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> E-posta Gönder
               </a>
-              <a href="https://www.linkedin.com/in/ismailaltayataman" target="_blank" rel="noopener" class="btn btn-secondary">
+              <a href="https://www.linkedin.com/in/ismailaltayataman" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="contact.linkedin">
                 <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn Profil
               </a>
-              <button onclick="copyEmail('i.altay.ataman@gmail.com')" class="btn btn-secondary">
+              <button onclick="copyEmail('i.altay.ataman@gmail.com')" class="btn btn-secondary" data-i18n="contact.copyEmail">
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i> E-posta Kopyala
               </button>
             </div>
@@ -437,7 +444,7 @@
   <!-- Persistent Global Site Footer -->
   <footer class="site-footer">
     <div class="container footer-container">
-      <div>
+      <div data-i18n="footer.copy">
         <strong>yiy.io</strong> — Masadan mutfağa en kısa yol © 2026. Tüm Hakları Saklıdır.
       </div>
 
@@ -450,10 +457,10 @@
   </footer>
 
   <!-- Floating Slide Arrows -->
-  <button class="slide-nav-arrow slide-nav-prev" id="slidePrevBtn" aria-label="Önceki Bölüm" disabled>
+  <button class="slide-nav-arrow slide-nav-prev" id="slidePrevBtn" aria-label="Önceki Bölüm" data-i18n-aria="arrows.prevAria" disabled>
     <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
   </button>
-  <button class="slide-nav-arrow slide-nav-next" id="slideNextBtn" aria-label="Sonraki Bölüm">
+  <button class="slide-nav-arrow slide-nav-next" id="slideNextBtn" aria-label="Sonraki Bölüm" data-i18n-aria="arrows.nextAria">
     <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
   </button>
 
@@ -468,9 +475,9 @@
         <i class="fa-solid fa-triangle-exclamation"></i>
       </div>
 
-      <h3 class="modal-title" id="modalTitle">Lisans Uyarısı</h3>
+      <h3 class="modal-title" id="modalTitle" data-i18n="modal.title">Lisans Uyarısı</h3>
 
-      <p class="modal-text">
+      <p class="modal-text" data-i18n="modal.text">
         İndireceğiniz <strong>yiy.io</strong> otomasyon yazılımı geçerli bir lisans anahtarı olmadan <strong>çalışmayacaktır</strong>.
       </p>
 
@@ -478,18 +485,18 @@
         <div class="modal-license-info">
           <i class="fa-solid fa-key modal-key-icon"></i>
           <div>
-            <span class="modal-license-label">Lisans & Bilgi İletişim:</span>
+            <span class="modal-license-label" data-i18n="modal.label">Lisans & Bilgi İletişim:</span>
             <span class="modal-license-email">i.altay.ataman@gmail.com</span>
           </div>
         </div>
-        <button class="btn btn-secondary modal-copy-btn" onclick="copyEmail('i.altay.ataman@gmail.com')" type="button">
+        <button class="btn btn-secondary modal-copy-btn" onclick="copyEmail('i.altay.ataman@gmail.com')" type="button" data-i18n="modal.copyBtn">
           <i class="fa-solid fa-copy"></i> Kopyala
         </button>
       </div>
 
       <div class="modal-actions">
-        <button class="btn btn-secondary" id="modalCancelBtn" type="button">Vazgeç</button>
-        <a href="https://github.com/AltayAtaman/yiy-io/archive/refs/heads/main.zip" class="btn btn-primary" id="modalConfirmDownloadBtn">
+        <button class="btn btn-secondary" id="modalCancelBtn" type="button" data-i18n="modal.cancelBtn">Vazgeç</button>
+        <a href="https://github.com/AltayAtaman/yiy-io/archive/refs/heads/main.zip" class="btn btn-primary" id="modalConfirmDownloadBtn" data-i18n="modal.confirmBtn">
           <i class="fa-solid fa-download"></i> Yine de İndir
         </a>
       </div>
@@ -521,6 +528,7 @@
     </div>
   </div>
 
+  <script src="translations.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
